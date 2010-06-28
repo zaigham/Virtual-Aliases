@@ -1,6 +1,6 @@
 //<?php
 // Virtual Aliases
-// version 0.0.1
+// version 0.0.2
 // Allows for an unlimited number of custom aliases per page.
 // By Brian Stanback @ www.stanback.net
  
@@ -20,9 +20,8 @@ $e = &$modx->event;
 if ($e->name == "OnPageNotFound") 
 {
    // Retrieve requested path + alias
-   $documentAlias = $modx->documentIdentifier;
-   $documentAlias = ($modx->virtualDir == "") ? $documentAlias : $modx->virtualDir . '/' . $documentAlias;
- 
+   $documentAlias = trim($_SERVER['REQUEST_URI'], '/');
+
    // Search TVs for potential alias matches
    $sql = "SELECT tvc.contentid as id, tvc.value as value FROM " . $modx->getFullTableName('site_tmplvars') . " tv ";
    $sql .= "INNER JOIN " . $modx->getFullTableName('site_tmplvar_templates') . " tvtpl ON tvtpl.tmplvarid = tv.id ";
@@ -43,10 +42,10 @@ if ($e->name == "OnPageNotFound")
       }
    }
  
-   if ($found)  // Redirect to new document, if an alias was found
+   if($found)  // Redirect to new document, if an alias was found
    {
       $pageUrl = $modx->makeUrl($found, '', '', "full");
-      $modx->sendRedirect($pageUrl, 0, "REDIRECT_HEADER", "301");  // Send a permanent redirect
+      $modx->sendRedirect($pageUrl, 0, "REDIRECT_HEADER", 'HTTP/1.1 301 Moved Permanently');
       exit(0);
    }
  
