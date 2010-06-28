@@ -1,4 +1,6 @@
-h3. Installation
+h3. Original Author: Brian Stanback
+
+h2. Installation
 
 * To install, first download the plugin code below.
 
