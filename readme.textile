@@ -1,0 +1,17 @@
+h3. Installation
+
+* To install, first download the plugin code below.
+
+* Create a new plugin within the MODx manager and copy and paste the contents of the downloaded code.
+
+* Check the *OnPageNotFound* box in the System Events tab.
+
+* Add the following to the plugin configuration:
+
+pre. &aliasesTV=Aliases TV name;string;Aliases
+
+* Finally, create a new Template Variable (TV) named "*Aliases*" with the following option:
+
+pre. Input Type: Textarea
+
+*Note:* New aliases should each be added on a separate line. Omit any leading or trailing slashes as well as the default suffix (usaully .html)
